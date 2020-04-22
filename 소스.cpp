@@ -5,7 +5,12 @@
 
 using namespace std;
 
-string intToBin(int a, int bit) {		//Ã³À½ ÀÔ·ÂµÈ mintermµéÀ» 2Áø¼ö·Î ¹Ù²ãÁÖ´Â ÇÔ¼ö
+// 1.ì›í•˜ëŠ” bitì˜ ìˆ˜ë¥¼ ì…ë ¥
+// 2.ì›í•˜ëŠ” mintermì˜ ê°œìˆ˜ ì…ë ¥
+// 3.ì…ë ¥í•œ ê°œìˆ˜ì— ë§ëŠ” mintermë“¤ì„ bitì˜ ë²”ìœ„ì— ë§ê²Œ ë„ì–´ì“°ê¸°ë¡œ êµ¬ë¶„í•˜ì—¬ ì •ìˆ˜ë¡œ ì…ë ¥
+// 4.ê²°ê³¼ë¬¼ ì¶œë ¥.
+
+string intToBin(int a, int bit) {		//ì²˜ìŒ ì…ë ¥ëœ mintermë“¤ì„ 2ì§„ìˆ˜ë¡œ ë°”ê¿”ì£¼ëŠ” í•¨ìˆ˜
 	string bin;
 	for (int i = 0; i < bit; i++) {
 		if (a % 2 == 0)
@@ -18,7 +23,7 @@ string intToBin(int a, int bit) {		//Ã³À½ ÀÔ·ÂµÈ mintermµéÀ» 2Áø¼ö·Î ¹Ù²ãÁÖ´Â ÇÔ
 	return bin;
 }
 
-int compare(string first, string last,int bit) {	//ºñ±³ÇÏ¿© 1Â÷ÀÌ³ª´Â°ÍÀ» °¡¸®´Â ÇÔ¼ö
+int compare(string first, string last,int bit) {	//ë¹„êµí•˜ì—¬ 1ì°¨ì´ë‚˜ëŠ”ê²ƒì„ ê°€ë¦¬ëŠ” í•¨ìˆ˜
 	int count = 0, idx = 0;
 	for (int i = 0; i < bit; i++) {
 		if (first[i] != last[i]) {
@@ -29,13 +34,13 @@ int compare(string first, string last,int bit) {	//ºñ±³ÇÏ¿© 1Â÷ÀÌ³ª´Â°ÍÀ» °¡¸®´Â
 	if (count == 1) return idx;
 	else return -1;
 }
-string change(string binary, int idx) {			//1Â÷ÀÌ³ª´Â °ÍÀ»À» '-'·Î ¹Ù²Ù´Â
-	binary[idx] = '-';							//ÇÔ¼ö
+string change(string binary, int idx) {			//1ì°¨ì´ë‚˜ëŠ” ê²ƒì„ì„ '-'ë¡œ ë°”ê¾¸ëŠ”
+	binary[idx] = '-';							//í•¨ìˆ˜
 	return binary;
 }
 
-int contain(int a,int index,vector<int> b,int c) {		//¸¶Áö¸·¿¡ ¾È¹­ÀÎ pi°¡ ¸î¹øÂ°¿¡ À§Ä¡Çß´ÂÁö
-	int result = 0;										//Ã£¾ÆÁÖ´Â ÇÔ¼ö
+int contain(int a,int index,vector<int> b,int c) {		//ë§ˆì§€ë§‰ì— ì•ˆë¬¶ì¸ piê°€ ëª‡ë²ˆì§¸ì— ìœ„ì¹˜í–ˆëŠ”ì§€
+	int result = 0;										//ì°¾ì•„ì£¼ëŠ” í•¨ìˆ˜
 
 	for(int cycle = 0;cycle< c;cycle++){
 		for (int i = 0; i < index; i++) {
@@ -53,36 +58,36 @@ int contain(int a,int index,vector<int> b,int c) {		//¸¶Áö¸·¿¡ ¾È¹­ÀÎ pi°¡ ¸î¹øÂ
 
 int main() {
 	int bit,numOfMin;
-	vector<string>binary;		// Ã³À½ mintermµéÀ» 2Áø¼ö·Î ¹Ù²Û °ªµé·Î ÀÌ vector·Î °è¼Ó ¹İº¹ÇÏ¸é¼­ ListingÇÔ
-	vector<string>binaryCopy;	// 1Â÷ÀÌ ³ª¼­ -·Î ´ëÃ¼µÉ ºÎºĞÀÌ ÀÖ´Â 2Áø¼öµé ÀúÀå
-	vector<string>copy;			// Listing ÇÑ °ªµéÀ» ÀúÀå.
-	vector<string>pi;			// ¸¶Áö¸·¿¡ ¹­ÀÌÁö ¾ÊÀº 2Áø¼öµéÀ» ±¸ÇÏ±â À§ÇØ¼­ ÃÊ¹İÀÇ mintermµéÀ» 2Áø¼ö·Î ¹Ù²Û °ª ÀúÀå
-	vector<int>tmpCopy;			// tmp°ªµéÀ» ÀúÀåÇÏ±â À§ÇÑ vector
-	vector<string>real;			// ÃÖÁ¾ P.IµéÀÇ vector
-	vector<int>tmp;				// 1Â÷ÀÌ ³ª´Â °ÍµéÀÇ À§Ä¡µé ÀúÀå
-	vector<int>idx;				// 2Áø¼öÀÇ ¾î´À ºÎºĞÀÌ -·Î ¹Ù²î¾î¾ß ÇÏ´ÂÁö ÀúÀå
+	vector<string>binary;		// ì²˜ìŒ mintermë“¤ì„ 2ì§„ìˆ˜ë¡œ ë°”ê¾¼ ê°’ë“¤ë¡œ ì´ vectorë¡œ ê³„ì† ë°˜ë³µí•˜ë©´ì„œ Listingí•¨
+	vector<string>binaryCopy;	// 1ì°¨ì´ ë‚˜ì„œ -ë¡œ ëŒ€ì²´ë  ë¶€ë¶„ì´ ìˆëŠ” 2ì§„ìˆ˜ë“¤ ì €ì¥
+	vector<string>copy;			// Listing í•œ ê°’ë“¤ì„ ì €ì¥.
+	vector<string>pi;			// ë§ˆì§€ë§‰ì— ë¬¶ì´ì§€ ì•Šì€ 2ì§„ìˆ˜ë“¤ì„ êµ¬í•˜ê¸° ìœ„í•´ì„œ ì´ˆë°˜ì˜ mintermë“¤ì„ 2ì§„ìˆ˜ë¡œ ë°”ê¾¼ ê°’ ì €ì¥
+	vector<int>tmpCopy;			// tmpê°’ë“¤ì„ ì €ì¥í•˜ê¸° ìœ„í•œ vector
+	vector<string>real;			// ìµœì¢… P.Ië“¤ì˜ vector
+	vector<int>tmp;				// 1ì°¨ì´ ë‚˜ëŠ” ê²ƒë“¤ì˜ ìœ„ì¹˜ë“¤ ì €ì¥
+	vector<int>idx;				// 2ì§„ìˆ˜ì˜ ì–´ëŠ ë¶€ë¶„ì´ -ë¡œ ë°”ë€Œì–´ì•¼ í•˜ëŠ”ì§€ ì €ì¥
 
 	
-	cout << "input bit: ";		//¿øÇÏ´Â bit¼ö ÀÔ·Â
+	cout << "input bit: ";		//ì›í•˜ëŠ” bitìˆ˜ ì…ë ¥
 	cin >> bit;
-	cout << "input number of minterm: ";	//minterm °³¼ö ÀÔ·Â
+	cout << "input number of minterm: ";	//minterm ê°œìˆ˜ ì…ë ¥
 	cin >> numOfMin;
-	cout << "input minterm(0~" << pow(2, bit) - 1 << "): ";	//ÀÔ·ÂÇÑ °³¼ö¿¡ ¸Â°Ô mintermÀÔ·Â
+	cout << "input minterm(0~" << pow(2, bit) - 1 << "): ";	//ì…ë ¥í•œ ê°œìˆ˜ì— ë§ê²Œ mintermì…ë ¥
 	
-	for (int i = 0; i < numOfMin; i++) {		//ÀÔ·ÂµÈ mintermµéÀ» 2Áø¼ö·Î ¹Ù²Ş
+	for (int i = 0; i < numOfMin; i++) {		//ì…ë ¥ëœ mintermë“¤ì„ 2ì§„ìˆ˜ë¡œ ë°”ê¿ˆ
 		int minterm;
 		cin >> minterm;
 		binary.push_back(intToBin(minterm,bit));
 	}
-	for (int i = 0; i < binary.size(); i++) {	//º¯È¯µÈ 2Áø¼öµéÀ» µÎ °³ÀÇ vector¿¡ ÀúÀå
+	for (int i = 0; i < binary.size(); i++) {	//ë³€í™˜ëœ 2ì§„ìˆ˜ë“¤ì„ ë‘ ê°œì˜ vectorì— ì €ì¥
 		real.push_back(binary[i]);
 		pi.push_back(binary[i]);
 	}
 		
 	/*
-	//vectorÀÖ´Â °ªµéÀ» ºñ±³ÇÏ¿© '-'·Î ¹Ù²Ù¸ç listingÇÏ°í.
-	//¹Ù²Ü°Ô ÀÖÀ¸¸é ¹Ù²Ù°í count++ÇØÁØ µÚ, ¸¶Áö¸·¿¡ count == 0 ÀÌ¸é
-	//ÀÌÁ¦ ´õ ÀÌ»ó ¹Ù²Ü °Ô ¾ø´Ù°í ÆÇ´ÜÇÏ¿© Á¾·á.
+	//vectorìˆëŠ” ê°’ë“¤ì„ ë¹„êµí•˜ì—¬ '-'ë¡œ ë°”ê¾¸ë©° listingí•˜ê³ .
+	//ë°”ê¿€ê²Œ ìˆìœ¼ë©´ ë°”ê¾¸ê³  count++í•´ì¤€ ë’¤, ë§ˆì§€ë§‰ì— count == 0 ì´ë©´
+	//ì´ì œ ë” ì´ìƒ ë°”ê¿€ ê²Œ ì—†ë‹¤ê³  íŒë‹¨í•˜ì—¬ ì¢…ë£Œ.
 	*/
 	int iter = 0;
 	while (true) {		
@@ -93,56 +98,56 @@ int main() {
 		copy.clear();
 		tmp.clear();
 		
-		// 2Áø¼öµéÀÌ µé¾îÀÖ´Â binary¸¦ ÀüÃ¼ÀûÀ¸·Î ºñ±³ÇÏ¸é¼­
-		// 1Â÷ÀÌ°¡ ³ª¸é ÇØ´ç 2Áø¼öµéÀÇ À§Ä¡¿Í ÇØ´ç °ªµéÀ»
-		// binaryCopy¿¡ ÀúÀå
+		// 2ì§„ìˆ˜ë“¤ì´ ë“¤ì–´ìˆëŠ” binaryë¥¼ ì „ì²´ì ìœ¼ë¡œ ë¹„êµí•˜ë©´ì„œ
+		// 1ì°¨ì´ê°€ ë‚˜ë©´ í•´ë‹¹ 2ì§„ìˆ˜ë“¤ì˜ ìœ„ì¹˜ì™€ í•´ë‹¹ ê°’ë“¤ì„
+		// binaryCopyì— ì €ì¥
 		for (int i = 0; i < binary.size() - 1; i++) {
 			for (int j = i + 1; j < binary.size(); j++) {
 				int result = compare(binary[i], binary[j], bit);
 				if (result != -1) {
 					
-					//tmp´Â 1Â÷ÀÌ³ª´Â 2Áø¼öµéÀÇ index°ª
+					//tmpëŠ” 1ì°¨ì´ë‚˜ëŠ” 2ì§„ìˆ˜ë“¤ì˜ indexê°’
 					tmp.push_back(i);
-					//binaryCopy´Â 1Â÷ÀÌ³ª´Â 2Áø¼öµéÀÇ °ª ex)000
+					//binaryCopyëŠ” 1ì°¨ì´ë‚˜ëŠ” 2ì§„ìˆ˜ë“¤ì˜ ê°’ ex)000
 					binaryCopy.push_back(binary[i]);
 					tmp.push_back(j);
 					binaryCopy.push_back(binary[j]);
-					//idx´Â binaryCopy¾î´À ÀÚ¸®°¡ -·Î ¹Ù²¸¾ß ÇÏ´ÂÁö ¾Ë·ÁÁÖ´Â vector.
+					//idxëŠ” binaryCopyì–´ëŠ ìë¦¬ê°€ -ë¡œ ë°”ê»´ì•¼ í•˜ëŠ”ì§€ ì•Œë ¤ì£¼ëŠ” vector.
 					idx.push_back(result);
 					count++;
 				}
 			}
 			
 		}	
-		//copy¶õ vector¿¡ À§¿¡¼­ Ã£Àº 1 Â÷ÀÌ³ª´Â °ªµéÀ»
-		//- ·Î ´ëÃ¼ÇÏ¿© copy¿¡ ÀúÀå
+		//copyë€ vectorì— ìœ„ì—ì„œ ì°¾ì€ 1 ì°¨ì´ë‚˜ëŠ” ê°’ë“¤ì„
+		//- ë¡œ ëŒ€ì²´í•˜ì—¬ copyì— ì €ì¥
 		for (int i = 0,j = 0; i < tmp.size(); i += 2,j++) {
 			copy.push_back(change(binaryCopy[i], idx[j]));	
 		}
 
-		//±âÁ¸ binaryµéÀ» ÃÊ±âÈ­ ÇÑ µÚ -·Î ´ëÃ¼µÈ °ÍµéÀÌ
-		//ÀúÀåµÇ¾î ÀÖ´Â copyÀÇ °ªµéÀ» binary¿¡ ³Ö¾îÁÜ.
+		//ê¸°ì¡´ binaryë“¤ì„ ì´ˆê¸°í™” í•œ ë’¤ -ë¡œ ëŒ€ì²´ëœ ê²ƒë“¤ì´
+		//ì €ì¥ë˜ì–´ ìˆëŠ” copyì˜ ê°’ë“¤ì„ binaryì— ë„£ì–´ì¤Œ.
 		binary.clear();
 		for (int i = 0; i < copy.size(); i++) {
 			binary.push_back(copy[i]);
 		}
 
 
-		//count == 0 ÀÌ¶õ°ÍÀº ´õ ÀÌ»ó 1Â÷ÀÌ³ª´Â °ªµéÀÌ ¾ø´Ü ¶æ.
-		//ÀÌÁ¦ ¸¶Áö¸· ´Ü°è¿¡¼­ ¹­ÀÌÁö ¾ÊÀº °ÍµéÀ» Ã£¾Æ¼­ ÃÖÁ¾ piµéÀÇ ÁıÇÕÀÎ
-		//real vector¿¡ ³Ö¾îÁÖ´Â ÀÛ¾÷À» ÀÌ ¾È¿¡¼­ ¼öÇà.
+		//count == 0 ì´ë€ê²ƒì€ ë” ì´ìƒ 1ì°¨ì´ë‚˜ëŠ” ê°’ë“¤ì´ ì—†ë‹¨ ëœ».
+		//ì´ì œ ë§ˆì§€ë§‰ ë‹¨ê³„ì—ì„œ ë¬¶ì´ì§€ ì•Šì€ ê²ƒë“¤ì„ ì°¾ì•„ì„œ ìµœì¢… pië“¤ì˜ ì§‘í•©ì¸
+		//real vectorì— ë„£ì–´ì£¼ëŠ” ì‘ì—…ì„ ì´ ì•ˆì—ì„œ ìˆ˜í–‰.
 		if (count == 0) {
-			//±âÁ¸ÀÇ vectorµé ÃÊ±âÈ­
+			//ê¸°ì¡´ì˜ vectorë“¤ ì´ˆê¸°í™”
 			binaryCopy.clear();
 			idx.clear();
 			tmp.clear();
 			copy.clear();
 			
-			// ÃÖÁ¾ÀûÀ¸·Î ¿Ï¼ºµÈ listing ¹Ù·Î Àü ´Ü°è±îÁö ±¸Çö
-			// ÀÌ·¸°Ô ÇÏ´Â ÀÌÀ¯´Â ¸ğµç piµéÀÌ ¹­ÀÎ°ÍÀÌ ¾Æ´Ï±â ¶§¹®¿¡
-			// Àü ´Ü°è¿¡¼­ ¹­ÀÌÁö ¾ÊÀº °ªµéÀ» Ã£±â À§ÇØ¼­ ±¸Çö
-			// µû¶ó¼­ ¹İº¹¹®ÀÇ È½¼ö´Â iter-1 Áï while¹® º¸´Ù ÇÑ ¹ø ´ú µ·´Ù.
-			// ¹İº¹¹® ¾ÈÀÇ ÀÛ¾÷Àº while¹®¿¡¼­ ÇÑ ÀÛ¾÷ÀÌ¶û ¶È°°À½.
+			// ìµœì¢…ì ìœ¼ë¡œ ì™„ì„±ëœ listing ë°”ë¡œ ì „ ë‹¨ê³„ê¹Œì§€ êµ¬í˜„
+			// ì´ë ‡ê²Œ í•˜ëŠ” ì´ìœ ëŠ” ëª¨ë“  pië“¤ì´ ë¬¶ì¸ê²ƒì´ ì•„ë‹ˆê¸° ë•Œë¬¸ì—
+			// ì „ ë‹¨ê³„ì—ì„œ ë¬¶ì´ì§€ ì•Šì€ ê°’ë“¤ì„ ì°¾ê¸° ìœ„í•´ì„œ êµ¬í˜„
+			// ë”°ë¼ì„œ ë°˜ë³µë¬¸ì˜ íšŸìˆ˜ëŠ” iter-1 ì¦‰ whileë¬¸ ë³´ë‹¤ í•œ ë²ˆ ëœ ëˆë‹¤.
+			// ë°˜ë³µë¬¸ ì•ˆì˜ ì‘ì—…ì€ whileë¬¸ì—ì„œ í•œ ì‘ì—…ì´ë‘ ë˜‘ê°™ìŒ.
 			for(int i = 0;i<iter-1;i++){		
 				for (int j = 0; j < pi.size() - 1; j++) {
 					for (int q = j+1; q < pi.size(); q++) {
@@ -169,18 +174,18 @@ int main() {
 				binaryCopy.clear();
 				
 			}
-			// ÀÌ·¸°Ô Ã£Àº ¾È ¹­ÀÎ °ªµéÀ» ÃÖÁ¾ piµéÀÌ µé¾îÀÖ´Â real vector¿¡ ³Ö¾îÁÜ.
+			// ì´ë ‡ê²Œ ì°¾ì€ ì•ˆ ë¬¶ì¸ ê°’ë“¤ì„ ìµœì¢… pië“¤ì´ ë“¤ì–´ìˆëŠ” real vectorì— ë„£ì–´ì¤Œ.
 			for (int i = 0; i < pi.size(); i++) {
 				int res = contain(i, tmpCopy.size(),tmpCopy,pi.size());
 				if (res != -1)
 					real.push_back(pi[res]);
 			}
 			
-			// ÃÖÁ¾°áÁ¤µÈ piµéÀÇ ÁıÇÕÀÎ real vector¸¦ Ãâ·Â
+			// ìµœì¢…ê²°ì •ëœ pië“¤ì˜ ì§‘í•©ì¸ real vectorë¥¼ ì¶œë ¥
 			cout << "____________________________________" << endl;
 			cout << "P.I" << endl;
 			int num = 0;
-			// sort¿Í erase unique´Â real ¾È¿¡¼­ Áßº¹µÈ °ªµéÀ» Á¦°ÅÇÏ±â À§ÇØ ¼öÇà
+			// sortì™€ erase uniqueëŠ” real ì•ˆì—ì„œ ì¤‘ë³µëœ ê°’ë“¤ì„ ì œê±°í•˜ê¸° ìœ„í•´ ìˆ˜í–‰
 			sort(real.begin(), real.end());
 			real.erase(unique(real.begin(), real.end()), real.end());
 			for (int i = 0; i < real.size(); i++) {
@@ -193,8 +198,8 @@ int main() {
 			break;
 		}
 
-		// count°¡ 0ÀÌ ¾Æ´Ï±â ¶§¹®¿¡ ¹İº¹È½¼ö iter¿¡ +1
-		// ºñ±³ÇÏ´Âµ¥ ÇÊ¿äÇÑ vectorµéÀ» ÃÊ±âÈ­ ÇÑ´Ù.
+		// countê°€ 0ì´ ì•„ë‹ˆê¸° ë•Œë¬¸ì— ë°˜ë³µíšŸìˆ˜ iterì— +1
+		// ë¹„êµí•˜ëŠ”ë° í•„ìš”í•œ vectorë“¤ì„ ì´ˆê¸°í™” í•œë‹¤.
 		else {
 			iter+=1;
 			binaryCopy.clear();
