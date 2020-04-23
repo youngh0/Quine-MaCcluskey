@@ -1,5 +1,6 @@
 /******************************************
 20171707 소프트웨어학부 차영호
+PI chart 까지 구현했습니다.
 ******************************************/
 
 #include<iostream>
@@ -66,11 +67,10 @@ int main() {
 	vector<string>binaryCopy;	// 1차이 나서 -로 대체될 부분이 있는 2진수들 저장
 	vector<string>copy;			// Listing 한 값들을 저장.
 	vector<string>pi;			// 마지막에 묶이지 않은 2진수들을 구하기 위해서 초반의 minterm들을 2진수로 바꾼 값 저장
-	vector<int>tmpCopy;			// tmp값들을 저장하기 위한 vector
-	vector<string>real;			// 최종 P.I들의 vector
 	vector<int>tmp;				// 1차이 나는 것들의 위치들 저장
+	vector<int>tmpCopy;			// tmp값들을 저장하기 위한 vector		
 	vector<int>idx;				// 2진수의 어느 부분이 -로 바뀌어야 하는지 저장
-
+	vector<string>real;			// 최종 P.I들의 vector
 	
 	cout << "input bit: ";		//원하는 bit수 입력
 	cin >> bit;
@@ -204,6 +204,7 @@ int main() {
 
 		// count가 0이 아니기 때문에 반복횟수 iter에 +1
 		// 비교하는데 필요한 vector들을 초기화 한다.
+		// 다시 1차이나는 것들이 없을때까지 반복.
 		else {
 			iter+=1;
 			binaryCopy.clear();
